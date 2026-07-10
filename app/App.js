@@ -5,6 +5,9 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold, Inter_800ExtraBold } from '@expo-google-fonts/inter';
 import SplashScreen from './src/screens/SplashScreen';
 import WelcomeScreen from './src/screens/WelcomeScreen';
+import LoginScreen from './src/screens/LoginScreen';
+import SignupScreen from './src/screens/SignupScreen';
+import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -37,41 +40,21 @@ export default function App() {
     );
   }
 
-  // Simple placeholder views for Login and Signup screens with a "Back" button
-  const renderLoginPlaceholder = () => (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="dark" />
-      <View style={styles.content}>
-        <Text style={styles.pageTitle}>LOGIN</Text>
-        <Text style={styles.pageSubtitle}>Login screen development pending...</Text>
-        <Pressable style={styles.backButton} onPress={() => setCurrentScreen('WELCOME')}>
-          <Text style={styles.backButtonText}>Back</Text>
-        </Pressable>
-      </View>
-    </SafeAreaView>
-  );
-
-  const renderSignupPlaceholder = () => (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="dark" />
-      <View style={styles.content}>
-        <Text style={styles.pageTitle}>SIGN UP</Text>
-        <Text style={styles.pageSubtitle}>Registration screen development pending...</Text>
-        <Pressable style={styles.backButton} onPress={() => setCurrentScreen('WELCOME')}>
-          <Text style={styles.backButtonText}>Back</Text>
-        </Pressable>
-      </View>
-    </SafeAreaView>
-  );
-
   return (
     <SafeAreaProvider>
       {currentScreen === 'SPLASH' && <SplashScreen />}
       {currentScreen === 'WELCOME' && (
         <WelcomeScreen onNavigate={(screen) => setCurrentScreen(screen)} />
       )}
-      {currentScreen === 'LOGIN' && renderLoginPlaceholder()}
-      {currentScreen === 'SIGNUP' && renderSignupPlaceholder()}
+      {currentScreen === 'LOGIN' && (
+        <LoginScreen onNavigate={(screen) => setCurrentScreen(screen)} />
+      )}
+      {currentScreen === 'SIGNUP' && (
+        <SignupScreen onNavigate={(screen) => setCurrentScreen(screen)} />
+      )}
+      {currentScreen === 'FORGOT_PASSWORD' && (
+        <ForgotPasswordScreen onNavigate={(screen) => setCurrentScreen(screen)} />
+      )}
     </SafeAreaProvider>
   );
 }
